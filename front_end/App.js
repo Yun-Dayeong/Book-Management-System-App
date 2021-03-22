@@ -3,7 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Main from './Components/Main'
+import Home from './Components/HomeStack'
 import BookDetail from './Components/BookDetail'
 
 const Stack = createStackNavigator();
@@ -11,8 +11,13 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Main" component={Main} />
+      <Stack.Navigator 
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false
+        }}
+        >
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="BookDetail" component={BookDetail} />
       </Stack.Navigator>
     </NavigationContainer>
