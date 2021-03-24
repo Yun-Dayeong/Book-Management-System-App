@@ -4,12 +4,12 @@ import {
     Text
 } from 'react-native'
 
-const BookDetailPresenter = (props) => {
+const JoinPresenter = (props) => {
     return (
         <View>
-            <Text>Book Detail</Text>
+            <Text>Join</Text>
         </View>
     );
 };
 
-export default BookDetailPresenter;
+export default JoinPresenter;
