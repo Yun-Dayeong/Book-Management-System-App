@@ -54,7 +54,7 @@ class LoginContainer extends Component {
                 }
                 else {
                     Snackbar.show({
-                        text: "오류! 페이지 새로고침 후 다시 시도해주세요. ",
+                        text: "오류! 다시 시도해주세요. ",
                         duration: Snackbar.LENGTH_SHORT,
                     });
                 }
