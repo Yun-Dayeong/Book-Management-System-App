@@ -27,6 +27,8 @@ class App extends React.Component {
               this.setState({
                   userId: result.id,
                   userPassword: result.password,
+                  userManagement : result.management, 
+                  userName: result.name
               })
           }
       })
@@ -61,7 +63,7 @@ class App extends React.Component {
               userName : ""
           })
           Snackbar.show({
-              text: 'Logout... Good bye!',
+              text: '로그아웃...',
               duration: Snackbar.LENGTH_LONG,
           });
           if(callback){
@@ -91,23 +93,5 @@ class App extends React.Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
 
 export default App;

@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     headerBodyText: {
         color: "black", 
         fontSize: 20,
+        fontWeight: 'bold',
         textAlign: 'center',
         textAlignVertical: 'center'
     },
@@ -81,12 +82,14 @@ const styles = StyleSheet.create({
         borderColor: 'black', 
         borderRadius: 5,
         borderWidth: 1.5, 
+        paddingHorizontal: 10, 
         margin: 5
     },
     joinButton: { 
-        backgroundColor: '#002266', 
+        backgroundColor: '#4C4C4C', 
         color: 'white', 
         fontSize: 18, 
+        fontWeight: 'bold',
         textAlign: 'center',
         textAlignVertical: 'center', 
         borderRadius: 5, 

@@ -48,7 +48,6 @@ export default class APIManager {
         axios(config)
             .then(response => {
                 if (callback) {
-                    console.log(response.data)
                     callback(response.data)
                 }
                 this.init()
