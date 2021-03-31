@@ -59,8 +59,6 @@ const LoginPresenter = (props) => {
 const styles = StyleSheet.create({
     headerStyle: {
         backgroundColor:'white', 
-        borderBottomColor: 'gray', 
-        borderBottomWidth: 1
     }, 
     headerBodyText: {
         color: "black", 

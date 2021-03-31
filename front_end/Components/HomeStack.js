@@ -26,7 +26,7 @@ const HomeStack = (props) => {
                 <Drawer.Screen name="Main">
                     {props_2 => <Main {...props} {...props_2}/>}
                 </Drawer.Screen>
-                <Drawer.Screen name="My Info">
+                <Drawer.Screen name="MyInfo">
                     {props_2 => <MyInfo {...props} {...props_2}/>}
                 </Drawer.Screen>
             </Drawer.Navigator>
@@ -43,7 +43,7 @@ const HomeStack = (props) => {
                 <Drawer.Screen name="Main">
                     {props_2 => <Main {...props} {...props_2} />}
                 </Drawer.Screen>
-                <Drawer.Screen name="Book Register">
+                <Drawer.Screen name="BookRegister">
                     {props_2 => <BookRegister {...props} {...props_2}/>}
                 </Drawer.Screen>
             </Drawer.Navigator>
