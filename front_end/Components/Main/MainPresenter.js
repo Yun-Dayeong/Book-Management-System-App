@@ -13,7 +13,7 @@ import {
     Header, 
     Left, 
     Body, 
-    Right
+    Right,
 } from 'native-base'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -46,8 +46,19 @@ const MainPresenter = (props) => {
                     </Body>
                     <Right style={{flex : 1}}></Right>
                 </Header>
+                <View style={styles.searchTextView}>
+                    <TextInput
+                        style={styles.searchTextInput}
+                        placeholder="책 이름을 입력하세요. "
+                        placeholderTextColor="gray"
+                        maxLength={30}
+                        value={props.searchText}
+                        onChangeText={text => props.input_searchText(text)}
+                    ></TextInput>
+                    <Text style={styles.searchButton} onPress={() => props.search()}>Search</Text>
+                </View>
             </View>
-            <Text style={styles.bookTitle}>등록된 책</Text>
+            <Text style={styles.bookTitle}>책 리스트</Text>
             <View style={{flex: 1, width: '100%'}}>
                 <View style={styles.bookView}>
                     {props.bookData.map((book, index) => 
@@ -115,6 +126,39 @@ const styles = StyleSheet.create({
         color: 'black', 
         fontSize: 13, 
     }, 
+    searchTextView: {
+        width: '100%', 
+        backgroundColor: 'white', 
+        flexDirection: 'row', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        paddingBottom: 15, 
+        borderBottomColor: '#BDBDBD', 
+        borderBottomWidth: 0.5
+    },
+    searchTextInput: {
+        width: '75%', 
+        height: 40, 
+        borderColor: '#3736FF',
+        borderTopLeftRadius: 5, 
+        borderBottomLeftRadius: 5,
+        borderWidth: 1.5,
+        paddingHorizontal: 10,
+    }, 
+    searchButton: {
+        width:'15%', 
+        height: 40, 
+        backgroundColor: '#3736FF', 
+        textAlign: 'center', 
+        textAlignVertical: 'center', 
+        borderTopRightRadius: 5, 
+        borderBottomRightRadius: 5, 
+        borderWidth: 1.5, 
+        color: 'white', 
+        fontSize: 13, 
+        fontWeight: 'bold', 
+        borderColor: '#3736FF'
+    }
 });
 
 export default MainPresenter;

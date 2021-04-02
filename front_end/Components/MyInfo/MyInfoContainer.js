@@ -15,10 +15,23 @@ class MyInfoContainer extends Component {
     }
 
     componentDidMount = () => {
-        this._selectBorrowBook()
+        this._load()
+    }
+
+    _load = () => {
+        this.props.navigation.addListener('focus', () => {
+            this._selectBorrowBook();
+        });
     }
 
     _selectBorrowBook = () => {
+        this.setState({
+            bookData: [],
+
+            modalVisible: false, 
+            modalBookId: -1
+        })
+
         am.url = `http://192.168.0.2:4000/books/getBorrowBook/${this.props.userId}`
 
         am.get((data) => {

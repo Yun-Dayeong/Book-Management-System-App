@@ -12,11 +12,20 @@ class MainContainer extends Component {
         bookData : [],
         scrollMsg : "",
         gifImage : false, 
-        refreshing: false
+
+        searchText : "", 
+
+        refreshing : false, 
     }
 
     componentDidMount = () => {
-        this._selectBook();
+        this._load();
+    }
+
+    _load = () => {
+        this.props.navigation.addListener('focus', () => {
+            this._selectBook();
+        });
     }
 
     _selectBook = () => {
@@ -27,6 +36,7 @@ class MainContainer extends Component {
             if (data.msg === 200) {
                 this.setState({
                     scrollMsg: "", 
+                    searchText : "", 
                     gifImage : false,
                     bookData: data.result
                 })
@@ -75,6 +85,33 @@ class MainContainer extends Component {
         })
     }
 
+    _input_searchText = (text) => {
+        this.setState({
+            searchText : text
+        })
+    }
+
+    _search = () => {
+        am.url = "http://192.168.0.2:4000/books/getAllBook"
+
+        am.get((data) => {
+            if (data.msg === 200) {
+                data = data.result.filter(book => {
+                    return book.tb_book_name.includes(this.state.searchText)
+                })
+                this.setState({
+                    bookData: data
+                })
+            }
+            else {
+                Snackbar.show({
+                    text: "오류! 다시 시도해주세요. ",
+                    duration: Snackbar.LENGTH_SHORT,
+                });
+            }
+        })
+    }
+
     _onRefresh = () => {
         this.setState({
           refreshing: true
@@ -91,7 +128,9 @@ class MainContainer extends Component {
                 {...this.props}
                 {...this.state}
                 moreData={this._moreData}
-                onRefresh={this._onRefresh}></MainPresenter>
+                input_searchText={this._input_searchText}
+                onRefresh={this._onRefresh}
+                search={this._search}></MainPresenter>
         );
     }
 }
