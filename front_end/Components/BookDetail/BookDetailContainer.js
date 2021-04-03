@@ -116,13 +116,10 @@ class BookDetailContainer extends Component {
         })
     }
 
-    _closeModal = (callback = null) => {
+    _closeModal = () => {
         this.setState({
             modalVisible : false, 
         })
-        if(callback){
-            callback
-        }
     }
 
     _deleteBook = () => {
@@ -131,13 +128,14 @@ class BookDetailContainer extends Component {
 
         am.post((data) => {
             if (data.msg === 200) {
-                this._closeModal(() => {
+                this._closeModal()
+                setTimeout(() => {
                     Snackbar.show({
                         text: "삭제되었습니다. ",
                         duration: Snackbar.LENGTH_SHORT
                     })
                     this.props.navigation.goBack()
-                })
+                }, 500);
             }
             else if (data.msg === 202) {
                 Snackbar.show({

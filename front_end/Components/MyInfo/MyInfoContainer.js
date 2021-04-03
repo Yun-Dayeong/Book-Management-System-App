@@ -27,8 +27,6 @@ class MyInfoContainer extends Component {
     _selectBorrowBook = () => {
         this.setState({
             bookData: [],
-
-            modalVisible: false, 
             modalBookId: -1
         })
 
@@ -73,16 +71,14 @@ class MyInfoContainer extends Component {
 
                 am.post((data) => {
                     if (data.msg === 200) {
-                        Snackbar.show({
-                            text: "반납되었습니다. ", 
-                            duration: Snackbar.LENGTH_SHORT
-                        })
-                        this.setState({
-                            bookData: [], 
-                            modalVisible : false, 
-                            modalBookId: -1
-                        })
-                        this._selectBorrowBook()
+                        this._closeModal()
+                        setTimeout(() => {
+                            Snackbar.show({
+                                text: "반납되었습니다. ", 
+                                duration: Snackbar.LENGTH_SHORT
+                            })
+                            this._selectBorrowBook()
+                        }, 500);
                     }
                     else {
                         Snackbar.show({
