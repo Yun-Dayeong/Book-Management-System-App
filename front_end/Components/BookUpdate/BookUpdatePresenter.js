@@ -17,7 +17,7 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const BookRegisterPresenter = (props) => {
+const BookUpdatePresenter = (props) => {
     return (
         <View>
             <View>
@@ -28,7 +28,7 @@ const BookRegisterPresenter = (props) => {
                         </TouchableOpacity>
                     </Left>
                     <Body style={{flex : 2, alignItems: 'center'}}>
-                        <Text style={styles.headerBodyText}>Book Register</Text>
+                        <Text style={styles.headerBodyText}>Book Update</Text>
                     </Body>
                     <Right style={{flex : 1}}></Right>
                 </Header>
@@ -52,7 +52,7 @@ const BookRegisterPresenter = (props) => {
                 <Text style={styles.bookImageButton} onPress={() => props.input_bookImage()}>Select Image</Text>
             </View>
             <View style={{justifyContent: 'center', marginTop: 20, flexDirection: 'row'}}>
-                <Text style={styles.button} onPress={() => {props.bookRegister()}}>책 등록</Text>
+                <Text style={styles.button} onPress={() => {props.bookUpdate()}}>책 수정</Text>
             </View>
         </View>
     );
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BookRegisterPresenter;
+export default BookUpdatePresenter;

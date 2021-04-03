@@ -17,7 +17,13 @@ class BookDetailContainer extends Component {
     }
 
     componentDidMount = () => {
-        this._selectBookData()
+        this._load()
+    }
+
+    _load = () => {
+        this.props.navigation.addListener('focus', () => {
+            this._selectBookData();
+        });
     }
 
     _selectBookData = () => {
@@ -110,10 +116,13 @@ class BookDetailContainer extends Component {
         })
     }
 
-    _closeModal = () => {
+    _closeModal = (callback = null) => {
         this.setState({
             modalVisible : false, 
         })
+        if(callback){
+            callback
+        }
     }
 
     _deleteBook = () => {
@@ -122,12 +131,13 @@ class BookDetailContainer extends Component {
 
         am.post((data) => {
             if (data.msg === 200) {
-                Snackbar.show({
-                    text: "삭제되었습니다. ",
-                    duration: Snackbar.LENGTH_SHORT
+                this._closeModal(() => {
+                    Snackbar.show({
+                        text: "삭제되었습니다. ",
+                        duration: Snackbar.LENGTH_SHORT
+                    })
+                    this.props.navigation.goBack()
                 })
-                this._closeModal()
-                this._selectBookData()
             }
             else if (data.msg === 202) {
                 Snackbar.show({

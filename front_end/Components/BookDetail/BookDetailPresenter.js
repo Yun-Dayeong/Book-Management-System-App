@@ -50,7 +50,7 @@ const BookDetailPresenter = (props) => {
             :
             props.userManagement === 1 ?
             <View style={{justifyContent: 'center', marginTop: 20, flexDirection: 'row'}}>
-                <Text style={styles.button2}>책 수정</Text>
+                <Text style={styles.button2} onPress={() => props.navigation.navigate('Book Update', { updateBookId: props.route.params.bookId })}>책 수정</Text>
                 <Text style={styles.button2} onPress={() => props.openModal()}>책 삭제</Text>
             </View>
             :

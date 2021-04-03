@@ -13,6 +13,24 @@ class JoinContainer extends Component {
         userName : ""
     }
 
+    componentDidMount = () => {
+        this._load()
+    }
+
+    _load = () => {
+        this.props.navigation.addListener('focus', () => {
+            this._resetData();
+        });
+    }
+
+    _resetData = () => {
+        this.setState({
+            userId : "",
+            userPassword : "", 
+            userName : ""
+        })
+    }
+
     _input_id = (text) => {
         this.setState({
             userId: text

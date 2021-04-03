@@ -1,37 +1,48 @@
 import React, { Component } from 'react';
 import * as ImagePicker from "react-native-image-picker"
 import Snackbar from 'react-native-snackbar'
-import APIManager from '../APIManagers';
 
-import BookRegisterPresenter from './BookRegisterPresenter';
+import APIManager from '../APIManagers';
+import BookUpdatePresenter from './BookUpdatePresenter'
 
 let am = new APIManager()
 
-class BookRegisterContainer extends Component {
+class BookUpdateContainer extends Component {
     state = {
-        bookName : "", 
-        bookAuthor : "",
+        bookName: "",
+        bookAuthor: "",
+
         bookImage: "",
-        imageViewURL: "", 
+        imageViewURL: ""
     }
 
     componentDidMount = () => {
-        this._load()
+        this._load();
     }
 
     _load = () => {
         this.props.navigation.addListener('focus', () => {
-                this._resetData();
+            this._selectBookData();
         });
     }
 
-    _resetData = () => {
-        this.setState({
-            bookName : "", 
-            bookAuthor : "",
-            bookImage: "",
-            imageViewURL: "",
-            bookUpdate : 0
+    _selectBookData = () => {
+        am.url = `http://192.168.0.2:4000/books/getBook/${this.props.route.params.updateBookId}`
+
+        am.get((data) => {
+            if (data.msg === 200) {
+                this.setState({
+                    bookName: data.result[0].tb_book_name,
+                    bookAuthor: data.result[0].tb_book_author,
+                    imageViewURL: data.result[0].tb_book_image,
+                })
+            }
+            else {
+                Snackbar.show({
+                    text: "오류! 다시 시도해주세요. ", 
+                    duration: Snackbar.LENGTH_SHORT
+                })
+            }
         })
     }
 
@@ -62,7 +73,8 @@ class BookRegisterContainer extends Component {
         })
     }
 
-    _bookRegister = () => {
+    _bookUpdate = () => {
+
         if (this.state.bookName === "") {
             alert("책 이름을 입력하세요. ")
         }
@@ -73,9 +85,9 @@ class BookRegisterContainer extends Component {
             alert("책 이미지를 입력하세요. ")
         }
         else {
-            //book register
-            am.url = "http://192.168.0.2:4000/books/insertBook"
-            am.data = { bookName: this.state.bookName, bookAuthor: this.state.bookAuthor }
+            //book update
+            am.url = "http://192.168.0.2:4000/books/updateBook"
+            am.data = { bookId: this.props.route.params.updateBookId, bookName: this.state.bookName, bookAuthor: this.state.bookAuthor }
 
             am.post((data) => {
                 if (data.msg === 200) {
@@ -89,7 +101,7 @@ class BookRegisterContainer extends Component {
                     am.post((data) => {
                         if (data.msg === 200) {
                             Snackbar.show({
-                                text:"등록되었습니다. ", 
+                                text:"수정되었습니다.  ", 
                                 duration: Snackbar.LENGTH_SHORT
                             })
                             this.props.navigation.goBack()
@@ -114,15 +126,15 @@ class BookRegisterContainer extends Component {
 
     render() {
         return (
-            <BookRegisterPresenter 
-                {...this.props} 
-                {...this.state}
-                input_bookName={this._input_bookName}
-                input_bookAuthor={this._input_bookAuthor}
-                input_bookImage={this._input_bookImage}
-                bookRegister={this._bookRegister}></BookRegisterPresenter>
+            <BookUpdatePresenter 
+            {...this.props} 
+            {...this.state}
+            input_bookName={this._input_bookName}
+            input_bookAuthor={this._input_bookAuthor}
+            input_bookImage={this._input_bookImage}
+            bookUpdate={this._bookUpdate}></BookUpdatePresenter>
         );
     }
 }
 
-export default BookRegisterContainer;
+export default BookUpdateContainer;
